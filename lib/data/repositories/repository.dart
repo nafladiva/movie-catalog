@@ -12,9 +12,11 @@ abstract class Repository {
 
 class RepositoryImpl implements Repository {
   final RemoteDataSource remoteDataSource;
+  final LocalDataSource localDataSource;
 
   RepositoryImpl({
     required this.remoteDataSource,
+    required this.localDataSource,
   });
 
   @override

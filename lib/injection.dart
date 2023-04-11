@@ -16,11 +16,22 @@ void init() {
   locator.registerLazySingleton<Repository>(
     () => RepositoryImpl(
       remoteDataSource: locator(),
+      localDataSource: locator(),
     ),
   );
 
   //Remote data sources
   locator.registerLazySingleton<RemoteDataSource>(
     () => RemoteDataSourceImpl(),
+  );
+
+  //Local data sources
+  locator.registerLazySingleton<LocalDataSource>(
+    () => LocalDataSourceImpl(hiveDatabase: locator()),
+  );
+
+  //Hive database
+  locator.registerLazySingleton<HiveLocalDatabase>(
+    () => HiveLocalDatabase(),
   );
 }

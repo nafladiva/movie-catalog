@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:gowatch/injection.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gowatch/presentation/cubit/navbar/navbar_cubit.dart';
 import 'package:gowatch/presentation/pages/pages.dart';
 
 import 'common/common.dart';
+import 'presentation/cubit/cubit.dart';
 
 void main() {
   di.init();

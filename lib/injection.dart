@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
-import 'package:gowatch/presentation/cubit/navbar/navbar_cubit.dart';
 
 import 'data/repositories/repository.dart';
 import 'data/sources/sources.dart';
+import 'presentation/cubit/cubit.dart';
 
 final locator = GetIt.instance;
 

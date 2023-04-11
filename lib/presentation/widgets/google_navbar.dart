@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:gowatch/common/common.dart';
-import 'package:gowatch/presentation/cubit/navbar/navbar_cubit.dart';
+
+import '../cubit/cubit.dart';
 
 class GoogleNavbar extends StatefulWidget {
   const GoogleNavbar({

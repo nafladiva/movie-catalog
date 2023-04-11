@@ -21,7 +21,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       );
 
       if (res.statusCode == 200) {
-        final decoded = json.decode(res.body);
+        final decoded = json.decode(res.body)['results'];
         return List<MovieMdl>.from(decoded.map((x) => MovieMdl.fromMap(x)));
       } else if (res.statusCode == 404) {
         throw DataException();
@@ -42,7 +42,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       );
 
       if (res.statusCode == 200) {
-        final decoded = json.decode(res.body);
+        final decoded = json.decode(res.body)['results'];
         return List<MovieMdl>.from(decoded.map((x) => MovieMdl.fromMap(x)));
       } else if (res.statusCode == 404) {
         throw DataException();

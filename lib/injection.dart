@@ -12,6 +12,10 @@ void init() {
     () => NavbarCubit(),
   );
 
+  locator.registerFactory(
+    () => MovieCubit(repository: locator()),
+  );
+
   //Repository
   locator.registerLazySingleton<Repository>(
     () => RepositoryImpl(

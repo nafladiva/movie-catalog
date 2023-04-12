@@ -119,6 +119,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 style: TStyles.subheading2(),
                               ),
                               const SizedBox(height: 8.0),
+                              //TODO: fix release date format
                               Text(
                                 movie?.releaseDate?.toIso8601String() ?? '',
                                 style: TStyles.paragraph1(),
@@ -142,7 +143,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40, left: 20),
+                    padding: const EdgeInsets.only(top: 50, left: 20),
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
                       child: const Icon(

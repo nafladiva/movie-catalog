@@ -17,10 +17,10 @@ void main() async {
 
   di.init();
 
-  //TODO: fix status bar icon color
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
   ));
 
   runApp(const MyApp());

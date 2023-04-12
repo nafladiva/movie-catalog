@@ -4,12 +4,20 @@ import 'package:gowatch/data/models/models.dart';
 import 'widgets.dart';
 
 class CarouselSlider extends StatelessWidget {
-  const CarouselSlider({
+  const CarouselSlider.movie({
     Key? key,
     required this.movieList,
-  }) : super(key: key);
+  })  : tvShowList = null,
+        super(key: key);
 
-  final List<MovieMdl> movieList;
+  const CarouselSlider.tvShow({
+    Key? key,
+    required this.tvShowList,
+  })  : movieList = null,
+        super(key: key);
+
+  final List<MovieMdl>? movieList;
+  final List<TVShowMdl>? tvShowList;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +25,22 @@ class CarouselSlider extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          ...movieList.map(
-            (movie) => Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: CarouselItem(movie: movie),
+          if (movieList != null) ...[
+            ...movieList!.map(
+              (movie) => Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: CarouselItem.movie(movie: movie),
+              ),
             ),
-          ),
+          ],
+          if (tvShowList != null) ...[
+            ...tvShowList!.map(
+              (tvShow) => Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: CarouselItem.tvShow(tvShow: tvShow),
+              ),
+            ),
+          ],
         ],
       ),
     );

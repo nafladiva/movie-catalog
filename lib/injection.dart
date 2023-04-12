@@ -11,9 +11,11 @@ void init() {
   locator.registerFactory(
     () => NavbarCubit(),
   );
-
   locator.registerFactory(
     () => MovieCubit(repository: locator()),
+  );
+  locator.registerFactory(
+    () => TVShowCubit(repository: locator()),
   );
 
   //Repository

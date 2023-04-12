@@ -44,13 +44,15 @@ class _PopularMovieViewState extends State<PopularMovieView> {
                 style: TStyles.heading1(),
               ),
               const SizedBox(height: 10.0),
-              if (state.movieResult?.isNotEmpty ?? false) ...[
-                HorizontalItemList(
+              if (state.state?.isLoading ?? false) ...[
+                const HorizontalListLoader(),
+              ] else if (state.state?.isError ?? false) ...[
+                const SizedBox(),
+              ] else ...[
+                HorizontalItemList.movie(
                   movieList: state.movieResult ?? [],
                 ),
-              ] else ...[
-                const HorizontalListLoader(),
-              ],
+              ]
             ],
           );
         },

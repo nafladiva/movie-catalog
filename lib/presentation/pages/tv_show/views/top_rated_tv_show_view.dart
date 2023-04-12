@@ -5,48 +5,48 @@ import 'package:gowatch/injection.dart';
 import 'package:gowatch/presentation/cubit/cubit.dart';
 import 'package:gowatch/presentation/widgets/widgets.dart';
 
-class TopRatedMovieView extends StatefulWidget {
-  const TopRatedMovieView({
+class TopRatedTVShowView extends StatefulWidget {
+  const TopRatedTVShowView({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<TopRatedMovieView> createState() => _TopRatedMovieViewState();
+  State<TopRatedTVShowView> createState() => _TopRatedTVShowViewState();
 }
 
-class _TopRatedMovieViewState extends State<TopRatedMovieView> {
-  late MovieCubit movieCubit;
+class _TopRatedTVShowViewState extends State<TopRatedTVShowView> {
+  late TVShowCubit tvShowCubit;
 
   @override
   void initState() {
     super.initState();
-    movieCubit = locator<MovieCubit>();
-    movieCubit.getTopRatedMovies();
+    tvShowCubit = locator<TVShowCubit>();
+    tvShowCubit.getTopRatedTVShows();
   }
 
   @override
   void dispose() {
-    movieCubit.close();
+    tvShowCubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: movieCubit,
-      child: BlocBuilder<MovieCubit, MovieState>(
+      value: tvShowCubit,
+      child: BlocBuilder<TVShowCubit, TVShowState>(
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Top Rated Movies',
+                'Top Rated TV Shows',
                 style: TStyles.heading1(),
               ),
               const SizedBox(height: 10.0),
-              if (state.movieResult?.isNotEmpty ?? false) ...[
-                HorizontalItemList.movie(
-                  movieList: state.movieResult ?? [],
+              if (state.tvShowResult?.isNotEmpty ?? false) ...[
+                HorizontalItemList.tvShow(
+                  tvShowList: state.tvShowResult ?? [],
                 ),
               ] else ...[
                 const HorizontalListLoader(),

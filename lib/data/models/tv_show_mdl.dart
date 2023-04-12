@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import 'genre_mdl.dart';
+import 'package:gowatch/data/models/models.dart';
 
 class TVShowMdl extends Equatable {
   const TVShowMdl({
@@ -8,9 +7,9 @@ class TVShowMdl extends Equatable {
     this.title,
     this.overview,
     this.genres,
+    this.seasons,
     this.posterPath,
     this.backdropPath,
-    this.releaseDate,
     this.voteAverage,
     this.voteCount,
   });
@@ -19,9 +18,9 @@ class TVShowMdl extends Equatable {
   final String? title;
   final String? overview;
   final List<GenreMdl>? genres;
+  final List<SeasonMdl>? seasons;
   final String? posterPath;
   final String? backdropPath;
-  final DateTime? releaseDate;
   final double? voteAverage;
   final int? voteCount;
 
@@ -33,11 +32,12 @@ class TVShowMdl extends Equatable {
             ? List<GenreMdl>.from(
                 (json["genres"] as List).map((x) => GenreMdl.fromMap(x)))
             : null,
+        seasons: json["seasons"] != null
+            ? List<SeasonMdl>.from(
+                (json["seasons"] as List).map((x) => SeasonMdl.fromMap(x)))
+            : null,
         posterPath: json["poster_path"],
         backdropPath: json["backdrop_path"],
-        releaseDate: json["release_date"] != null
-            ? DateTime.parse(json["release_date"])
-            : null,
         voteAverage: json["vote_average"]?.toDouble(),
         voteCount: json["vote_count"],
       );
@@ -49,9 +49,9 @@ class TVShowMdl extends Equatable {
         title,
         overview,
         genres,
+        seasons,
         posterPath,
         backdropPath,
-        releaseDate,
         voteAverage,
         voteCount,
       ];

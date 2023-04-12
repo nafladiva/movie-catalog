@@ -4,38 +4,38 @@ import 'package:gowatch/injection.dart';
 import 'package:gowatch/presentation/cubit/cubit.dart';
 import 'package:gowatch/presentation/widgets/widgets.dart';
 
-class NowPlayingMovieView extends StatefulWidget {
-  const NowPlayingMovieView({
+class OnTheAirTVShowView extends StatefulWidget {
+  const OnTheAirTVShowView({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<NowPlayingMovieView> createState() => _NowPlayingMovieViewState();
+  State<OnTheAirTVShowView> createState() => _OnTheAirTVShowViewState();
 }
 
-class _NowPlayingMovieViewState extends State<NowPlayingMovieView> {
-  late MovieCubit movieCubit;
+class _OnTheAirTVShowViewState extends State<OnTheAirTVShowView> {
+  late TVShowCubit tvShowCubit;
 
   @override
   void initState() {
     super.initState();
-    movieCubit = locator<MovieCubit>();
-    movieCubit.getNowPlayingMovies();
+    tvShowCubit = locator<TVShowCubit>();
+    tvShowCubit.getOnTheAirTVShows();
   }
 
   @override
   void dispose() {
-    movieCubit.close();
+    tvShowCubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: movieCubit,
-      child: BlocBuilder<MovieCubit, MovieState>(
+      value: tvShowCubit,
+      child: BlocBuilder<TVShowCubit, TVShowState>(
         builder: (context, state) {
-          return CarouselSlider.movie(movieList: state.movieResult ?? []);
+          return CarouselSlider.tvShow(tvShowList: state.tvShowResult ?? []);
         },
       ),
     );

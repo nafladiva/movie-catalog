@@ -151,8 +151,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             );
           }
 
-          //TODO: change loader
-          return const CircularProgressIndicator();
+          return const DetailPageLoader();
         },
       ),
     );

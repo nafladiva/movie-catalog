@@ -32,6 +32,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   }
 
   @override
+  void dispose() {
+    movieCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: movieCubit,

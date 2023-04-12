@@ -15,20 +15,30 @@ class MoviePage extends StatefulWidget {
   State<MoviePage> createState() => _MoviePageState();
 }
 
-class _MoviePageState extends State<MoviePage> {
-  late MovieCubit cubit;
+class _MoviePageState extends State<MoviePage>
+    with AutomaticKeepAliveClientMixin {
+  late MovieCubit movieCubit;
 
   @override
   void initState() {
     super.initState();
-    cubit = locator<MovieCubit>();
-    cubit.getPopularMovies();
+    movieCubit = locator<MovieCubit>();
+    movieCubit.getPopularMovies();
   }
+
+  @override
+  void dispose() {
+    movieCubit.close();
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: cubit,
+      value: movieCubit,
       child: BlocBuilder<MovieCubit, MovieState>(
         builder: (context, state) {
           return Scaffold(

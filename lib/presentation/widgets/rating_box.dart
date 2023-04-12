@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gowatch/common/common.dart';
 
 class RatingBox extends StatelessWidget {
-  const RatingBox({super.key});
+  const RatingBox({
+    super.key,
+    required this.voteAvg,
+    required this.voteCount,
+  });
+
+  final double voteAvg;
+  final int voteCount;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class RatingBox extends StatelessWidget {
                 color: Themes.yellowColor,
               ),
               Text(
-                '7.5 / 10',
+                '$voteAvg / 10',
                 style: TStyles.subheading1(color: Themes.yellowColor),
               ),
             ],
@@ -34,7 +41,7 @@ class RatingBox extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Text(
-          'Voted by 123 people',
+          'Voted by $voteCount people',
           style: TStyles.paragraph3(),
         ),
       ],

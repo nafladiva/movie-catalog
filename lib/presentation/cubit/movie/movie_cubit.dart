@@ -63,5 +63,26 @@ class MovieCubit extends Cubit<MovieState> {
     }
   }
 
-  //TODO: implement get detail function
+  Future<void> getMovieDetail(int id) async {
+    emit(state.copyWith(state: ViewState.loading()));
+
+    try {
+      final res = await repository.getDetailMovie(id);
+      res.fold(
+        (failure) {
+          emit(state.copyWith(state: ViewState.failed()));
+        },
+        (data) {
+          emit(
+            state.copyWith(
+              state: ViewState.success(),
+              movieResult: [data], //detail in index 0
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(state: ViewState.failed()));
+    }
+  }
 }

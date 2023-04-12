@@ -27,7 +27,11 @@ class PosterItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 12.0),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, MovieDetailPage.routeName),
+        onTap: () => Navigator.pushNamed(
+          context,
+          MovieDetailPage.routeName,
+          arguments: movie?.id,
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12.0),
           child: CachedNetworkImage(

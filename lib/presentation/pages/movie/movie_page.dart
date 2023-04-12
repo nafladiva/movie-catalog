@@ -4,7 +4,9 @@ import 'package:gowatch/common/common.dart';
 import 'package:gowatch/injection.dart';
 import 'package:gowatch/presentation/cubit/cubit.dart';
 
-import '../widgets/widgets.dart';
+import 'views/now_playing_movie_view.dart';
+import 'views/popular_movie_view.dart';
+import 'views/top_rated_movie_view.dart';
 
 class MoviePage extends StatefulWidget {
   const MoviePage({super.key});
@@ -46,23 +48,11 @@ class _MoviePageState extends State<MoviePage> {
                         style: TStyles.paragraph1(),
                       ),
                       const SizedBox(height: 20.0),
-                      const CarouselSlider(),
+                      const NowPlayingMovieView(),
                       const SizedBox(height: 40.0),
-                      Text(
-                        'Popular Movies',
-                        style: TStyles.heading1(),
-                      ),
-                      const SizedBox(height: 10.0),
-                      HorizontalItemList(
-                        movieList: state.movieResult ?? [],
-                      ),
+                      const PopularMovieView(),
                       const SizedBox(height: 30.0),
-                      Text(
-                        'Top Rated Movies',
-                        style: TStyles.heading1(),
-                      ),
-                      const SizedBox(height: 10.0),
-                      // const HorizontalItemList(),
+                      const TopRatedMovieView(),
                     ],
                   ),
                 ),

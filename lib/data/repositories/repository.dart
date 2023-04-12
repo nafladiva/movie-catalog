@@ -6,6 +6,7 @@ import '../sources/sources.dart';
 
 abstract class Repository {
   Future<Either<Failure, List<MovieMdl>>> getPopularMovies();
+  Future<Either<Failure, List<MovieMdl>>> getTopRatedMovies();
   Future<Either<Failure, List<MovieMdl>>> getNowPlayingMovies();
   Future<Either<Failure, MovieMdl>> getDetailMovie(int id);
 }
@@ -23,6 +24,18 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<MovieMdl>>> getPopularMovies() async {
     try {
       final result = await remoteDataSource.getPopularMovies();
+      return Right(result.map((e) => e).toList());
+    } on ServerException {
+      return const Left(ServerFailure());
+    } on DataException {
+      return const Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieMdl>>> getTopRatedMovies() async {
+    try {
+      final result = await remoteDataSource.getTopRatedMovies();
       return Right(result.map((e) => e).toList());
     } on ServerException {
       return const Left(ServerFailure());

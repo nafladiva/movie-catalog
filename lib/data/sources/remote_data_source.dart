@@ -7,6 +7,7 @@ import '../models/models.dart';
 
 abstract class RemoteDataSource {
   Future<List<MovieMdl>> getPopularMovies();
+  Future<List<MovieMdl>> getTopRatedMovies();
   Future<List<MovieMdl>> getNowPlayingMovies();
   Future<MovieMdl> getDetailMovie(int id);
 }
@@ -18,6 +19,27 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       final res = await http.get(
         Uri.parse(
             '${MyConsts.baseUrl}/movie/popular?api_key=${MyConsts.apiKey}'),
+      );
+
+      if (res.statusCode == 200) {
+        final decoded = json.decode(res.body)['results'];
+        return List<MovieMdl>.from(decoded.map((x) => MovieMdl.fromMap(x)));
+      } else if (res.statusCode == 404) {
+        throw DataException();
+      }
+
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<MovieMdl>> getTopRatedMovies() async {
+    try {
+      final res = await http.get(
+        Uri.parse(
+            '${MyConsts.baseUrl}/movie/top_rated?api_key=${MyConsts.apiKey}'),
       );
 
       if (res.statusCode == 200) {

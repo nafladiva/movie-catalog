@@ -40,6 +40,29 @@ class MovieCubit extends Cubit<MovieState> {
     }
   }
 
+  Future<void> getTopRatedMovies() async {
+    emit(state.copyWith(state: ViewState.loading()));
+
+    try {
+      final res = await repository.getTopRatedMovies();
+      res.fold(
+        (failure) {
+          emit(state.copyWith(state: ViewState.failed()));
+        },
+        (data) {
+          emit(
+            state.copyWith(
+              state: ViewState.success(),
+              movieResult: data,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(state: ViewState.failed()));
+    }
+  }
+
   Future<void> getNowPlayingMovies() async {
     emit(state.copyWith(state: ViewState.loading()));
 

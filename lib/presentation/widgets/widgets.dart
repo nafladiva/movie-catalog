@@ -1,4 +1,5 @@
 export 'base_shimmer_loader.dart';
+export 'carousel_item.dart';
 export 'carousel_slider.dart';
 export 'default_button.dart';
 export 'detail_page_loader.dart';

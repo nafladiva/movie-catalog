@@ -3,10 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gowatch/injection.dart';
 import 'package:gowatch/presentation/cubit/movie/movie_cubit.dart';
+import 'package:gowatch/presentation/widgets/widgets.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:gowatch/common/common.dart';
-
-import '../widgets/widgets.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const routeName = '/detail-movie';

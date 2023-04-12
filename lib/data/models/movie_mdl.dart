@@ -27,7 +27,7 @@ class MovieMdl extends Equatable {
 
   factory MovieMdl.fromMap(Map<String, dynamic> json) => MovieMdl(
         id: json["id"],
-        title: json["original_title"],
+        title: json["title"],
         overview: json["overview"],
         genres: json["genres"] != null
             ? List<GenreMdl>.from(

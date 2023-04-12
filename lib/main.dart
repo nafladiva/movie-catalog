@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: MyConsts.appName,
         theme: Themes.myTheme,
-        //TODO: add splash screen
         home: const MainPage(),
         onGenerateRoute: (settings) {
           switch (settings.name) {

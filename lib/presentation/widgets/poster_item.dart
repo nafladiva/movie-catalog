@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gowatch/common/common.dart';
 import 'package:gowatch/data/models/models.dart';
 import 'package:gowatch/presentation/pages/pages.dart';
+import 'package:gowatch/presentation/widgets/widgets.dart';
 
 class PosterItem extends StatelessWidget {
   const PosterItem.movie({
@@ -37,6 +38,8 @@ class PosterItem extends StatelessWidget {
           child: CachedNetworkImage(
             width: 125,
             imageUrl: '${MyConsts.baseImageUrl}$posterPath',
+            placeholder: (context, url) =>
+                const BaseShimmerLoader(height: 180, width: 125),
           ),
         ),
       ),

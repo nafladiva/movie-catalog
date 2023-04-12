@@ -44,9 +44,13 @@ class _TopRatedMovieViewState extends State<TopRatedMovieView> {
                 style: TStyles.heading1(),
               ),
               const SizedBox(height: 10.0),
-              HorizontalItemList(
-                movieList: state.movieResult ?? [],
-              ),
+              if (state.movieResult?.isNotEmpty ?? false) ...[
+                HorizontalItemList(
+                  movieList: state.movieResult ?? [],
+                ),
+              ] else ...[
+                const HorizontalListLoader(),
+              ],
             ],
           );
         },

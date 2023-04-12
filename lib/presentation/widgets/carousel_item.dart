@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gowatch/common/common.dart';
 import 'package:gowatch/data/models/models.dart';
 import 'package:gowatch/presentation/pages/pages.dart';
+import 'package:gowatch/presentation/widgets/widgets.dart';
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
@@ -25,6 +26,8 @@ class CarouselItem extends StatelessWidget {
         child: CachedNetworkImage(
           width: 280,
           imageUrl: '${MyConsts.baseImageUrl}${movie.backdropPath}',
+          placeholder: (context, url) =>
+              const BaseShimmerLoader(height: 155, width: 280),
         ),
       ),
     );

@@ -26,7 +26,7 @@ class TVShowMdl extends Equatable {
 
   factory TVShowMdl.fromMap(Map<String, dynamic> json) => TVShowMdl(
         id: json["id"],
-        title: json["original_title"],
+        title: json["name"],
         overview: json["overview"],
         genres: json["genres"] != null
             ? List<GenreMdl>.from(

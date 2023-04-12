@@ -12,7 +12,11 @@ class TVShowPage extends StatefulWidget {
   State<TVShowPage> createState() => _TVShowPageState();
 }
 
-class _TVShowPageState extends State<TVShowPage> {
+class _TVShowPageState extends State<TVShowPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

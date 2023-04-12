@@ -38,14 +38,20 @@ class PosterItem extends StatelessWidget {
           }
 
           if (tvShow != null) {
-            //TODO: navigate to tv show detail page
+            Navigator.pushNamed(
+              context,
+              TVShowDetailPage.routeName,
+              arguments: tvShow?.id,
+            );
           }
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12.0),
           child: CachedNetworkImage(
             width: 125,
-            imageUrl: '${MyConsts.baseImageUrl}$posterPath',
+            imageUrl: posterPath != null
+                ? '${MyConsts.baseImageUrl}$posterPath'
+                : MyConsts.placeholderErrorImageUrl,
             placeholder: (context, url) =>
                 const BaseShimmerLoader(height: 180, width: 125),
           ),

@@ -45,6 +45,11 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: arg),
               );
+            case TVShowDetailPage.routeName:
+              int arg = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => TVShowDetailPage(id: arg),
+              );
             default:
               return MaterialPageRoute(builder: (_) {
                 return const Scaffold(

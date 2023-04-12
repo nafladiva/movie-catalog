@@ -17,59 +17,37 @@ class MoviePage extends StatefulWidget {
 
 class _MoviePageState extends State<MoviePage>
     with AutomaticKeepAliveClientMixin {
-  late MovieCubit movieCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    movieCubit = locator<MovieCubit>();
-    movieCubit.getPopularMovies();
-  }
-
-  @override
-  void dispose() {
-    movieCubit.close();
-    super.dispose();
-  }
-
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: movieCubit,
-      child: BlocBuilder<MovieCubit, MovieState>(
-        builder: (context, state) {
-          return Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hello! 👋',
-                        style: TStyles.heading1(),
-                      ),
-                      Text(
-                        'What kinda movie you wanna go?',
-                        style: TStyles.paragraph1(),
-                      ),
-                      const SizedBox(height: 20.0),
-                      const NowPlayingMovieView(),
-                      const SizedBox(height: 40.0),
-                      const PopularMovieView(),
-                      const SizedBox(height: 30.0),
-                      const TopRatedMovieView(),
-                    ],
-                  ),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hello! 👋',
+                  style: TStyles.heading1(),
                 ),
-              ),
+                Text(
+                  'What kinda movie you wanna go?',
+                  style: TStyles.paragraph1(),
+                ),
+                const SizedBox(height: 20.0),
+                const NowPlayingMovieView(),
+                const SizedBox(height: 40.0),
+                const PopularMovieView(),
+                const SizedBox(height: 30.0),
+                const TopRatedMovieView(),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -9,3 +9,4 @@ export 'horizontal_list_loader.dart';
 export 'my_badge.dart';
 export 'poster_item.dart';
 export 'rating_box.dart';
+export 'season_card.dart';

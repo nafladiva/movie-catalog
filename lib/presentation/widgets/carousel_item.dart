@@ -38,7 +38,11 @@ class CarouselItem extends StatelessWidget {
         }
 
         if (tvShow != null) {
-          //TODO: navigate to tv show detail page
+          Navigator.pushNamed(
+            context,
+            TVShowDetailPage.routeName,
+            arguments: tvShow?.id,
+          );
         }
       },
       child: ClipRRect(

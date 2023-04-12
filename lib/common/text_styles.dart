@@ -11,6 +11,14 @@ class TStyles {
     );
   }
 
+  static TextStyle heading2({Color? color}) {
+    return TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold,
+      color: color ?? Themes.whiteColor,
+    );
+  }
+
   static TextStyle subheading1({Color? color}) {
     return TextStyle(
       fontSize: 14.0,
@@ -38,21 +46,21 @@ class TStyles {
   static TextStyle paragraph1({Color? color}) {
     return TextStyle(
       fontSize: 12.0,
-      color: color ?? Themes.whiteColor,
+      color: color ?? Themes.whiteColor.withOpacity(0.8),
     );
   }
 
   static TextStyle paragraph2({Color? color}) {
     return TextStyle(
       fontSize: 10.0,
-      color: color ?? Themes.whiteColor,
+      color: color ?? Themes.whiteColor.withOpacity(0.8),
     );
   }
 
   static TextStyle paragraph3({Color? color}) {
     return TextStyle(
       fontSize: 8.0,
-      color: color ?? Themes.whiteColor,
+      color: color ?? Themes.whiteColor.withOpacity(0.8),
     );
   }
 }

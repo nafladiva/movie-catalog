@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gowatch/data/models/movie_mdl.dart';
+import 'package:gowatch/data/models/models.dart';
 
-import '../../common/common.dart';
+import 'widgets.dart';
 
 class HorizontalItemList extends StatelessWidget {
   const HorizontalItemList({
@@ -19,16 +18,7 @@ class HorizontalItemList extends StatelessWidget {
       child: Row(
         children: [
           ...movieList.map(
-            (item) => Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: CachedNetworkImage(
-                  width: 125,
-                  imageUrl: '${MyConsts.baseImageUrl}${item.posterPath}',
-                ),
-              ),
-            ),
+            (item) => PosterItem.movie(movie: item),
           ),
         ],
       ),

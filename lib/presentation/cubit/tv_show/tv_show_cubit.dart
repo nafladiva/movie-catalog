@@ -13,6 +13,7 @@ class TVShowCubit extends Cubit<TVShowState> {
       : super(
           TVShowState(
             state: ViewState.initial(),
+            watchlistState: ViewState.initial(),
             tvShowResult: const [],
           ),
         );
@@ -106,6 +107,46 @@ class TVShowCubit extends Cubit<TVShowState> {
       );
     } catch (e) {
       emit(state.copyWith(state: ViewState.failed()));
+    }
+  }
+
+  Future<void> addToWatchlist(WatchlistMdl watchlist) async {
+    emit(state.copyWith(watchlistState: ViewState.loading()));
+
+    try {
+      final res = await repository.addToWatchlist(watchlist);
+      res.fold(
+        (failure) {
+          emit(state.copyWith(watchlistState: ViewState.failed()));
+        },
+        (data) {
+          emit(
+            state.copyWith(watchlistState: ViewState.success(message: data)),
+          );
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(watchlistState: ViewState.failed()));
+    }
+  }
+
+  Future<void> removeFromWatchlist(WatchlistMdl watchlist) async {
+    emit(state.copyWith(watchlistState: ViewState.loading()));
+
+    try {
+      final res = await repository.addToWatchlist(watchlist);
+      res.fold(
+        (failure) {
+          emit(state.copyWith(watchlistState: ViewState.failed()));
+        },
+        (data) {
+          emit(
+            state.copyWith(watchlistState: ViewState.success(message: data)),
+          );
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(watchlistState: ViewState.failed()));
     }
   }
 }

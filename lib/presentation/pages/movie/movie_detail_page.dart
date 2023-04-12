@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gowatch/injection.dart';
-import 'package:gowatch/presentation/cubit/movie/movie_cubit.dart';
-import 'package:gowatch/presentation/widgets/widgets.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:gowatch/injection.dart';
+import 'package:gowatch/data/models/models.dart';
+import 'package:gowatch/presentation/cubit/cubit.dart';
+import 'package:gowatch/presentation/widgets/widgets.dart';
 import 'package:gowatch/common/common.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -135,7 +136,20 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 style: TStyles.paragraph1(),
                               ),
                               const SizedBox(height: 40.0),
-                              const DefaultButton()
+                              DefaultButton(
+                                text: 'Add to watchlist',
+                                onTap: () {
+                                  //TODO: check if its already in watchlist
+                                  movieCubit.addToWatchlist(
+                                    WatchlistMdl(
+                                      id: movie?.id ?? 0,
+                                      type: WatchlistType.movie,
+                                      title: movie?.title ?? '',
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 10.0),
                             ],
                           )
                         ],

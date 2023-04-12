@@ -16,6 +16,11 @@ abstract class Repository {
   Future<Either<Failure, List<TVShowMdl>>> getTopRatedTVShows();
   Future<Either<Failure, List<TVShowMdl>>> getOnTheAirTVShows();
   Future<Either<Failure, TVShowMdl>> getDetailTVShow(int id);
+
+  Future<Either<Failure, String>> addToWatchlist(WatchlistMdl watchlist);
+  Future<Either<Failure, String>> removeFromWatchlist(
+    WatchlistMdl watchlist,
+  );
 }
 
 class RepositoryImpl implements Repository {
@@ -116,6 +121,34 @@ class RepositoryImpl implements Repository {
     try {
       final result = await remoteDataSource.getDetailTVShow(id);
       return Right(result);
+    } on ServerException {
+      return const Left(ServerFailure());
+    } on DataException {
+      return const Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> addToWatchlist(
+    WatchlistMdl watchlist,
+  ) async {
+    try {
+      localDataSource.addWatchlist(watchlist);
+      return const Right('Added to watchlist!');
+    } on ServerException {
+      return const Left(ServerFailure());
+    } on DataException {
+      return const Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> removeFromWatchlist(
+    WatchlistMdl watchlist,
+  ) async {
+    try {
+      localDataSource.removeWatchlist(watchlist.id);
+      return const Right('Removed from watchlist');
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {

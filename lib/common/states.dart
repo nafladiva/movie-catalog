@@ -11,10 +11,9 @@ class ViewState<T> {
         data = null,
         message = null;
 
-  ViewState.success({this.data})
+  ViewState.success({this.data, this.message})
       : isLoading = false,
-        isError = false,
-        message = null;
+        isError = false;
 
   ViewState.failed({this.message})
       : isLoading = false,

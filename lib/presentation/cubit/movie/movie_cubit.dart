@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gowatch/common/common.dart';
-import 'package:gowatch/data/models/movie_mdl.dart';
+import 'package:gowatch/data/models/models.dart';
 import 'package:gowatch/data/repositories/repository.dart';
 
 part 'movie_state.dart';
@@ -13,6 +13,7 @@ class MovieCubit extends Cubit<MovieState> {
       : super(
           MovieState(
             state: ViewState.initial(),
+            watchlistState: ViewState.initial(),
             movieResult: const [],
           ),
         );
@@ -106,6 +107,46 @@ class MovieCubit extends Cubit<MovieState> {
       );
     } catch (e) {
       emit(state.copyWith(state: ViewState.failed()));
+    }
+  }
+
+  Future<void> addToWatchlist(WatchlistMdl watchlist) async {
+    emit(state.copyWith(watchlistState: ViewState.loading()));
+
+    try {
+      final res = await repository.addToWatchlist(watchlist);
+      res.fold(
+        (failure) {
+          emit(state.copyWith(watchlistState: ViewState.failed()));
+        },
+        (data) {
+          emit(
+            state.copyWith(watchlistState: ViewState.success(message: data)),
+          );
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(watchlistState: ViewState.failed()));
+    }
+  }
+
+  Future<void> removeFromWatchlist(WatchlistMdl watchlist) async {
+    emit(state.copyWith(watchlistState: ViewState.loading()));
+
+    try {
+      final res = await repository.addToWatchlist(watchlist);
+      res.fold(
+        (failure) {
+          emit(state.copyWith(watchlistState: ViewState.failed()));
+        },
+        (data) {
+          emit(
+            state.copyWith(watchlistState: ViewState.success(message: data)),
+          );
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(watchlistState: ViewState.failed()));
     }
   }
 }

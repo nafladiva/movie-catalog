@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:gowatch/data/models/models.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gowatch/injection.dart';
@@ -144,7 +145,19 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                   (item) => SeasonCard(season: item),
                                 ),
                                 const SizedBox(height: 30.0),
-                                const DefaultButton(),
+                                DefaultButton(
+                                  text: 'Add to watchlist',
+                                  onTap: () {
+                                    //TODO: checking watchlist status
+                                    tvShowCubit.addToWatchlist(
+                                      WatchlistMdl(
+                                        id: tvShow?.id ?? 0,
+                                        type: WatchlistType.tvShow,
+                                        title: tvShow?.title ?? '',
+                                      ),
+                                    );
+                                  },
+                                ),
                                 const SizedBox(height: 50.0),
                               ],
                             )

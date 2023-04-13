@@ -149,6 +149,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   final isInWatchlist = state.isInWatchlist;
                                   final watchlistId = '1_${movie?.id}';
 
+                                  if (state.state?.isError ?? false) {
+                                    return const SizedBox();
+                                  }
+
                                   return DefaultButton(
                                     text: isInWatchlist
                                         ? 'Remove from watchlist'
@@ -183,16 +187,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50, left: 20),
-                    child: InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Themes.whiteColor,
-                      ),
-                    ),
-                  ),
+                  const AppBarBackButton(),
                 ],
               ),
             );

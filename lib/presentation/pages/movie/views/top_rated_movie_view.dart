@@ -48,6 +48,8 @@ class _TopRatedMovieViewState extends State<TopRatedMovieView> {
                 HorizontalItemList.movie(
                   movieList: state.movieResult ?? [],
                 ),
+              ] else if (state.state?.isError ?? false) ...[
+                const DefaultError(),
               ] else ...[
                 const HorizontalListLoader(),
               ],

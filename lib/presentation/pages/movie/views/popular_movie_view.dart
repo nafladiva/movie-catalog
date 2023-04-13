@@ -47,7 +47,7 @@ class _PopularMovieViewState extends State<PopularMovieView> {
               if (state.state?.isLoading ?? false) ...[
                 const HorizontalListLoader(),
               ] else if (state.state?.isError ?? false) ...[
-                const SizedBox(),
+                const DefaultError(),
               ] else ...[
                 HorizontalItemList.movie(
                   movieList: state.movieResult ?? [],

@@ -35,6 +35,10 @@ class _NowPlayingMovieViewState extends State<NowPlayingMovieView> {
       value: movieCubit,
       child: BlocBuilder<MovieCubit, MovieState>(
         builder: (context, state) {
+          if (state.state?.isError ?? false) {
+            return const DefaultError();
+          }
+
           return CarouselSlider.movie(movieList: state.movieResult ?? []);
         },
       ),

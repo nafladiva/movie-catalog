@@ -48,6 +48,8 @@ class _TopRatedTVShowViewState extends State<TopRatedTVShowView> {
                 HorizontalItemList.tvShow(
                   tvShowList: state.tvShowResult ?? [],
                 ),
+              ] else if (state.state?.isError ?? false) ...[
+                const DefaultError(),
               ] else ...[
                 const HorizontalListLoader(),
               ],

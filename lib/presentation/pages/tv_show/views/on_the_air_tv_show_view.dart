@@ -35,6 +35,10 @@ class _OnTheAirTVShowViewState extends State<OnTheAirTVShowView> {
       value: tvShowCubit,
       child: BlocBuilder<TVShowCubit, TVShowState>(
         builder: (context, state) {
+          if (state.state?.isError ?? false) {
+            return const DefaultError();
+          }
+
           return CarouselSlider.tvShow(tvShowList: state.tvShowResult ?? []);
         },
       ),

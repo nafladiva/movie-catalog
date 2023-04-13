@@ -61,22 +61,6 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                     color: Themes.defaultColor,
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(20.0)),
-                    // header: Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Center(
-                    //       child: Container(
-                    //         margin: const EdgeInsets.only(top: 24.0),
-                    //         width: 90,
-                    //         height: 5,
-                    //         decoration: BoxDecoration(
-                    //           color: Themes.primaryColor.withOpacity(0.7),
-                    //           borderRadius: BorderRadius.circular(20.0),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     body: Column(
                       children: [
                         CachedNetworkImage(
@@ -167,6 +151,10 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                     final isInWatchlist = state.isInWatchlist;
                                     final watchlistId = '2_${tvShow?.id}';
 
+                                    if (state.state?.isError ?? false) {
+                                      return const SizedBox();
+                                    }
+
                                     return DefaultButton(
                                       text: isInWatchlist
                                           ? 'Remove from watchlist'
@@ -203,16 +191,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50, left: 20),
-                    child: InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Themes.whiteColor,
-                      ),
-                    ),
-                  ),
+                  const AppBarBackButton(),
                 ],
               ),
             );

@@ -47,7 +47,7 @@ class _PopularTVShowViewState extends State<PopularTVShowView> {
               if (state.state?.isLoading ?? false) ...[
                 const HorizontalListLoader(),
               ] else if (state.state?.isError ?? false) ...[
-                const SizedBox(),
+                const DefaultError(),
               ] else ...[
                 HorizontalItemList.tvShow(
                   tvShowList: state.tvShowResult ?? [],

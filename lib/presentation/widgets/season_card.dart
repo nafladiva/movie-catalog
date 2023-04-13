@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gowatch/common/common.dart';
 import 'package:gowatch/data/models/models.dart';
+import 'package:gowatch/presentation/widgets/widgets.dart';
 
 class SeasonCard extends StatelessWidget {
   const SeasonCard({
@@ -29,6 +30,8 @@ class SeasonCard extends StatelessWidget {
               imageUrl: season.posterPath != null
                   ? '${MyConsts.baseImageUrl}${season.posterPath}'
                   : MyConsts.placeholderErrorImageUrl,
+              placeholder: (context, url) =>
+                  const BaseShimmerLoader(height: 107, width: 75),
             ),
           ),
           const SizedBox(width: 12.0),

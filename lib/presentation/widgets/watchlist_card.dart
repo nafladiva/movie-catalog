@@ -47,6 +47,8 @@ class WatchlistCard extends StatelessWidget {
               child: CachedNetworkImage(
                 width: 70,
                 imageUrl: '${MyConsts.baseImageUrl}${watchlist.posterPath}',
+                placeholder: (context, url) =>
+                    const BaseShimmerLoader(height: 100, width: 70),
               ),
             ),
             const SizedBox(width: 12.0),

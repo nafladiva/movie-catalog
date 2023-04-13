@@ -29,7 +29,7 @@ class _GoogleNavbarState extends State<GoogleNavbar> {
           activeColor: Themes.defaultColor,
           rippleColor: Colors.grey[300]!,
           tabBackgroundColor: Themes.primaryColor.withOpacity(0.2),
-          backgroundColor: Colors.white,
+          backgroundColor: Themes.whiteColor,
           iconSize: 24,
           gap: 5,
           selectedIndex: state,

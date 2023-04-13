@@ -27,8 +27,6 @@ class WatchlistCubit extends Cubit<WatchlistState> {
           emit(state.copyWith(state: ViewState.failed()));
         },
         (data) {
-          print(data.toString());
-
           emit(
             state.copyWith(
               state: ViewState.success(),

@@ -130,11 +130,11 @@ class MovieCubit extends Cubit<MovieState> {
     }
   }
 
-  Future<void> removeFromWatchlist(WatchlistMdl watchlist) async {
+  Future<void> removeFromWatchlist(String watchlistId) async {
     emit(state.copyWith(watchlistState: ViewState.loading()));
 
     try {
-      final res = await repository.addToWatchlist(watchlist);
+      final res = await repository.removeFromWatchlist(watchlistId);
       res.fold(
         (failure) {
           emit(state.copyWith(watchlistState: ViewState.failed()));

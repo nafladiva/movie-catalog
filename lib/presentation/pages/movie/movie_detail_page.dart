@@ -24,17 +24,22 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
   late MovieCubit movieCubit;
+  late WatchlistCubit watchlistCubit;
 
   @override
   void initState() {
     super.initState();
     movieCubit = locator<MovieCubit>();
     movieCubit.getMovieDetail(widget.id);
+
+    watchlistCubit = locator<WatchlistCubit>();
+    watchlistCubit.checkWatchlistStatus('1_${widget.id}');
   }
 
   @override
   void dispose() {
     movieCubit.close();
+    watchlistCubit.close();
     super.dispose();
   }
 
@@ -138,17 +143,36 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 style: TStyles.paragraph1(),
                               ),
                               const SizedBox(height: 40.0),
-                              DefaultButton(
-                                text: 'Add to watchlist',
-                                onTap: () {
-                                  //TODO: check if its already in watchlist
-                                  movieCubit.addToWatchlist(
-                                    WatchlistMdl(
-                                      id: '1_${movie?.id}',
-                                      title: movie?.title ?? '',
-                                      posterPath: movie?.posterPath,
-                                      addedTimeStamp: DateTime.now(),
-                                    ),
+                              BlocBuilder<WatchlistCubit, WatchlistState>(
+                                bloc: watchlistCubit,
+                                builder: (context, state) {
+                                  final isInWatchlist = state.isInWatchlist;
+                                  final watchlistId = '1_${movie?.id}';
+
+                                  return DefaultButton(
+                                    text: isInWatchlist
+                                        ? 'Remove from watchlist'
+                                        : 'Add to watchlist',
+                                    icon:
+                                        isInWatchlist ? Icons.close : Icons.add,
+                                    onTap: () {
+                                      if (isInWatchlist) {
+                                        movieCubit
+                                            .removeFromWatchlist(watchlistId);
+                                      } else {
+                                        movieCubit.addToWatchlist(
+                                          WatchlistMdl(
+                                            id: watchlistId,
+                                            title: movie?.title ?? '',
+                                            posterPath: movie?.posterPath,
+                                            addedTimeStamp: DateTime.now(),
+                                          ),
+                                        );
+                                      }
+
+                                      watchlistCubit
+                                          .checkWatchlistStatus(watchlistId);
+                                    },
                                   );
                                 },
                               ),

@@ -19,8 +19,6 @@ class _WatchlistPageState extends State<WatchlistPage> {
     super.initState();
     watchlistCubit = context.read<WatchlistCubit>();
     watchlistCubit.getWatchlist();
-
-    print('reload');
   }
 
   @override
@@ -29,8 +27,6 @@ class _WatchlistPageState extends State<WatchlistPage> {
       value: watchlistCubit,
       child: BlocBuilder<WatchlistCubit, WatchlistState>(
         builder: (context, state) {
-          print('Watchlist: ${state.watchlist?.length}');
-
           return Scaffold(
             body: SafeArea(
               child: Padding(
@@ -40,7 +36,7 @@ class _WatchlistPageState extends State<WatchlistPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Your watchlist',
+                        'Your watchlist 🧡',
                         style: TStyles.heading1(),
                       ),
                       const SizedBox(height: 25.0),

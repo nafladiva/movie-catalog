@@ -24,17 +24,22 @@ class TVShowDetailPage extends StatefulWidget {
 
 class _TVShowDetailPageState extends State<TVShowDetailPage> {
   late TVShowCubit tvShowCubit;
+  late WatchlistCubit watchlistCubit;
 
   @override
   void initState() {
     super.initState();
     tvShowCubit = locator<TVShowCubit>();
     tvShowCubit.getTVShowDetail(widget.id);
+
+    watchlistCubit = locator<WatchlistCubit>();
+    watchlistCubit.checkWatchlistStatus('2_${widget.id}');
   }
 
   @override
   void dispose() {
     tvShowCubit.close();
+    watchlistCubit.close();
     super.dispose();
   }
 
@@ -156,17 +161,37 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                   (item) => SeasonCard(season: item),
                                 ),
                                 const SizedBox(height: 30.0),
-                                DefaultButton(
-                                  text: 'Add to watchlist',
-                                  onTap: () {
-                                    //TODO: checking watchlist status
-                                    tvShowCubit.addToWatchlist(
-                                      WatchlistMdl(
-                                        id: '2_${tvShow?.id}',
-                                        title: tvShow?.title ?? '',
-                                        posterPath: tvShow?.posterPath,
-                                        addedTimeStamp: DateTime.now(),
-                                      ),
+                                BlocBuilder<WatchlistCubit, WatchlistState>(
+                                  bloc: watchlistCubit,
+                                  builder: (context, state) {
+                                    final isInWatchlist = state.isInWatchlist;
+                                    final watchlistId = '2_${tvShow?.id}';
+
+                                    return DefaultButton(
+                                      text: isInWatchlist
+                                          ? 'Remove from watchlist'
+                                          : 'Add to watchlist',
+                                      icon: isInWatchlist
+                                          ? Icons.close
+                                          : Icons.add,
+                                      onTap: () {
+                                        if (isInWatchlist) {
+                                          tvShowCubit
+                                              .removeFromWatchlist(watchlistId);
+                                        } else {
+                                          tvShowCubit.addToWatchlist(
+                                            WatchlistMdl(
+                                              id: watchlistId,
+                                              title: tvShow?.title ?? '',
+                                              posterPath: tvShow?.posterPath,
+                                              addedTimeStamp: DateTime.now(),
+                                            ),
+                                          );
+                                        }
+
+                                        watchlistCubit
+                                            .checkWatchlistStatus(watchlistId);
+                                      },
                                     );
                                   },
                                 ),

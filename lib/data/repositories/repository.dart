@@ -20,9 +20,7 @@ abstract class Repository {
   Future<Either<Failure, List<WatchlistMdl>>> getWatchlist();
   Future<Either<Failure, bool>> checkWatchlistStatus(String watchlistId);
   Future<Either<Failure, String>> addToWatchlist(WatchlistMdl watchlist);
-  Future<Either<Failure, String>> removeFromWatchlist(
-    WatchlistMdl watchlist,
-  );
+  Future<Either<Failure, String>> removeFromWatchlist(String watchlistId);
 }
 
 class RepositoryImpl implements Repository {
@@ -158,10 +156,10 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, String>> removeFromWatchlist(
-    WatchlistMdl watchlist,
+    String watchlistId,
   ) async {
     try {
-      localDataSource.removeWatchlist(watchlist.id);
+      localDataSource.removeWatchlist(watchlistId);
       return const Right('Removed from watchlist');
     } on ServerException {
       return const Left(ServerFailure());

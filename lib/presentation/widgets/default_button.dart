@@ -5,10 +5,12 @@ class DefaultButton extends StatelessWidget {
   const DefaultButton({
     Key? key,
     required this.text,
+    required this.icon,
     this.onTap,
   }) : super(key: key);
 
   final String text;
+  final IconData icon;
   final VoidCallback? onTap;
 
   @override
@@ -26,7 +28,7 @@ class DefaultButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.add, color: Themes.defaultColor),
+          Icon(icon, color: Themes.defaultColor),
           const SizedBox(width: 5.0),
           Text(
             text,

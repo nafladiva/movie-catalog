@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gowatch/data/models/models.dart';
 
-import 'widgets.dart';
+import 'carousel_item.dart';
 
 class CarouselSlider extends StatelessWidget {
   const CarouselSlider.movie({

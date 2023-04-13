@@ -17,6 +17,9 @@ void init() {
   locator.registerFactory(
     () => TVShowCubit(repository: locator()),
   );
+  locator.registerFactory(
+    () => WatchlistCubit(repository: locator()),
+  );
 
   //Repository
   locator.registerLazySingleton<Repository>(

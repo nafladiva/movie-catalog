@@ -13,7 +13,7 @@ import 'presentation/pages/pages.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(WatchlistMdlAdapter());
-  //TODO: Open Hive box
+  await Hive.openBox<WatchlistMdl>(MyConsts.watchlistBox);
 
   di.init();
 
@@ -31,8 +31,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di.locator<NavbarCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => di.locator<NavbarCubit>()),
+        BlocProvider(create: (context) => di.locator<WatchlistCubit>()),
+      ],
       child: MaterialApp(
         title: MyConsts.appName,
         theme: Themes.myTheme,

@@ -6,8 +6,8 @@ import 'db/hive_local_database.dart';
 abstract class LocalDataSource {
   List<WatchlistMdl> getWatchlist();
   void addWatchlist(WatchlistMdl watchlist);
-  void removeWatchlist(int id);
-  bool checkWatchlistStatus(int id);
+  void removeWatchlist(String id);
+  bool checkWatchlistStatus(String watchlistId);
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
@@ -40,18 +40,18 @@ class LocalDataSourceImpl implements LocalDataSource {
   }
 
   @override
-  void removeWatchlist(int id) {
+  void removeWatchlist(String watchlistId) {
     try {
-      hiveDatabase.removeWatchlist(id);
+      hiveDatabase.removeWatchlist(watchlistId);
     } catch (e) {
       throw DatabaseException();
     }
   }
 
   @override
-  bool checkWatchlistStatus(int id) {
+  bool checkWatchlistStatus(String watchlistId) {
     try {
-      return hiveDatabase.checkWatchlistStatus(id);
+      return hiveDatabase.checkWatchlistStatus(watchlistId);
     } catch (e) {
       throw DatabaseException();
     }

@@ -11,11 +11,12 @@ class HiveLocalDatabase {
     Hive.box<WatchlistMdl>(MyConsts.watchlistBox).put(watchlist.id, watchlist);
   }
 
-  void removeWatchlist(int id) {
-    Hive.box<WatchlistMdl>(MyConsts.watchlistBox).delete(id);
+  void removeWatchlist(String watchlistId) {
+    Hive.box<WatchlistMdl>(MyConsts.watchlistBox).delete(watchlistId);
   }
 
-  bool checkWatchlistStatus(int id) {
-    return Hive.box<WatchlistMdl>(MyConsts.watchlistBox).containsKey(id);
+  bool checkWatchlistStatus(String watchlistId) {
+    return Hive.box<WatchlistMdl>(MyConsts.watchlistBox)
+        .containsKey(watchlistId);
   }
 }

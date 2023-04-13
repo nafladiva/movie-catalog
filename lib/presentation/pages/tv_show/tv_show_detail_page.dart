@@ -56,22 +56,22 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                     color: Themes.defaultColor,
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(20.0)),
-                    header: Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 24.0),
-                            width: 90,
-                            height: 5,
-                            decoration: BoxDecoration(
-                              color: Themes.primaryColor.withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // header: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Center(
+                    //       child: Container(
+                    //         margin: const EdgeInsets.only(top: 24.0),
+                    //         width: 90,
+                    //         height: 5,
+                    //         decoration: BoxDecoration(
+                    //           color: Themes.primaryColor.withOpacity(0.7),
+                    //           borderRadius: BorderRadius.circular(20.0),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     body: Column(
                       children: [
                         CachedNetworkImage(
@@ -82,13 +82,22 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                     ),
                     panel: Padding(
                       padding: const EdgeInsets.only(
-                        top: 40.0,
+                        top: 30.0,
                         left: 16.0,
                         right: 16.0,
                       ),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 24.0),
+                              width: 90,
+                              height: 5,
+                              decoration: BoxDecoration(
+                                color: Themes.primaryColor.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
                             Text(
                               tvShow?.title ?? '',
                               style: TStyles.heading2(),
@@ -111,7 +120,9 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                   runSpacing: 8.0,
                                   children: [
                                     ...(tvShow?.genres ?? []).map(
-                                      (genre) => MyBadge(genre: genre),
+                                      (genre) => MyBadge(
+                                        text: genre.name ?? '',
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -151,9 +162,10 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
                                     //TODO: checking watchlist status
                                     tvShowCubit.addToWatchlist(
                                       WatchlistMdl(
-                                        id: tvShow?.id ?? 0,
-                                        type: WatchlistType.tvShow,
+                                        id: '2_${tvShow?.id}',
                                         title: tvShow?.title ?? '',
+                                        posterPath: tvShow?.posterPath,
+                                        addedTimeStamp: DateTime.now(),
                                       ),
                                     );
                                   },

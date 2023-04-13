@@ -100,7 +100,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 runSpacing: 8.0,
                                 children: [
                                   ...(movie?.genres ?? []).map(
-                                    (genre) => MyBadge(genre: genre),
+                                    (genre) => MyBadge(
+                                      text: genre.name ?? '',
+                                    ),
                                   ),
                                 ],
                               ),
@@ -142,9 +144,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   //TODO: check if its already in watchlist
                                   movieCubit.addToWatchlist(
                                     WatchlistMdl(
-                                      id: movie?.id ?? 0,
-                                      type: WatchlistType.movie,
+                                      id: '1_${movie?.id}',
                                       title: movie?.title ?? '',
+                                      posterPath: movie?.posterPath,
+                                      addedTimeStamp: DateTime.now(),
                                     ),
                                   );
                                 },

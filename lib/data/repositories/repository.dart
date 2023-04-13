@@ -17,6 +17,8 @@ abstract class Repository {
   Future<Either<Failure, List<TVShowMdl>>> getOnTheAirTVShows();
   Future<Either<Failure, TVShowMdl>> getDetailTVShow(int id);
 
+  Future<Either<Failure, List<WatchlistMdl>>> getWatchlist();
+  Future<Either<Failure, bool>> checkWatchlistStatus(String watchlistId);
   Future<Either<Failure, String>> addToWatchlist(WatchlistMdl watchlist);
   Future<Either<Failure, String>> removeFromWatchlist(
     WatchlistMdl watchlist,
@@ -36,7 +38,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<MovieMdl>>> getPopularMovies() async {
     try {
       final result = await remoteDataSource.getPopularMovies();
-      return Right(result.map((e) => e).toList());
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {
@@ -48,7 +50,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<MovieMdl>>> getTopRatedMovies() async {
     try {
       final result = await remoteDataSource.getTopRatedMovies();
-      return Right(result.map((e) => e).toList());
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {
@@ -60,7 +62,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<MovieMdl>>> getNowPlayingMovies() async {
     try {
       final result = await remoteDataSource.getNowPlayingMovies();
-      return Right(result.map((e) => e).toList());
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {
@@ -84,7 +86,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<TVShowMdl>>> getOnTheAirTVShows() async {
     try {
       final result = await remoteDataSource.getOnTheAirTVShows();
-      return Right(result.map((e) => e).toList());
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {
@@ -96,7 +98,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<TVShowMdl>>> getPopularTVShows() async {
     try {
       final result = await remoteDataSource.getPopularTVShows();
-      return Right(result.map((e) => e).toList());
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {
@@ -108,7 +110,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<TVShowMdl>>> getTopRatedTVShows() async {
     try {
       final result = await remoteDataSource.getTopRatedTVShows();
-      return Right(result.map((e) => e).toList());
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {
@@ -120,6 +122,18 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, TVShowMdl>> getDetailTVShow(int id) async {
     try {
       final result = await remoteDataSource.getDetailTVShow(id);
+      return Right(result);
+    } on ServerException {
+      return const Left(ServerFailure());
+    } on DataException {
+      return const Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<WatchlistMdl>>> getWatchlist() async {
+    try {
+      final result = localDataSource.getWatchlist();
       return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
@@ -149,6 +163,18 @@ class RepositoryImpl implements Repository {
     try {
       localDataSource.removeWatchlist(watchlist.id);
       return const Right('Removed from watchlist');
+    } on ServerException {
+      return const Left(ServerFailure());
+    } on DataException {
+      return const Left(DataFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkWatchlistStatus(String watchlistId) async {
+    try {
+      final result = localDataSource.checkWatchlistStatus(watchlistId);
+      return Right(result);
     } on ServerException {
       return const Left(ServerFailure());
     } on DataException {

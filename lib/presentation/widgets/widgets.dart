@@ -10,3 +10,4 @@ export 'my_badge.dart';
 export 'poster_item.dart';
 export 'rating_box.dart';
 export 'season_card.dart';
+export 'watchlist_card.dart';

@@ -17,27 +17,24 @@ class WatchlistMdlAdapter extends TypeAdapter<WatchlistMdl> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return WatchlistMdl(
-      id: fields[0] as int,
-      type: fields[1] as WatchlistType,
-      title: fields[2] as String,
-      posterPath: fields[3] as String?,
-      addedTimeStamp: fields[4] as DateTime?,
+      id: fields[0] as String,
+      title: fields[1] as String,
+      posterPath: fields[2] as String?,
+      addedTimeStamp: fields[3] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, WatchlistMdl obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.type)
-      ..writeByte(2)
       ..write(obj.title)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.posterPath)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.addedTimeStamp);
   }
 

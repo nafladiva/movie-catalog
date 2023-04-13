@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gowatch/common/common.dart';
-import 'package:gowatch/data/models/genre_mdl.dart';
 
 class MyBadge extends StatelessWidget {
   const MyBadge({
     super.key,
-    required this.genre,
+    required this.text,
   });
 
-  final GenreMdl genre;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class MyBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
-        genre.name ?? '',
+        text,
         style: TStyles.paragraph2(color: Themes.orangeColor),
       ),
     );

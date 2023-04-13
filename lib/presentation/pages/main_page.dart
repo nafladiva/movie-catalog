@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:gowatch/presentation/widgets/widgets.dart';
 
-import '../widgets/widgets.dart';
 import 'pages.dart';
 
 class MainPage extends StatefulWidget {
@@ -29,6 +30,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void dispose() {
     pageController.dispose();
+    Hive.close();
     super.dispose();
   }
 

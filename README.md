@@ -1,16 +1,19 @@
-# gowatch
+# GoWatch
 
-A new Flutter project.
+A movie and tv show catalog
 
-## Getting Started
+## How to install
 
-This project is a starting point for a Flutter application.
+- Install Flutter SDK on your device
 
-A few resources to get you started if this is your first Flutter project:
+- If you want to run the app with Emulator/Simulator, please don't forget to install it 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## How to run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Clone this repository
+
+- Enable your Emulator/Simulator or your real device
+
+- Run the app with this command
+    ``` flutter run ```
+
